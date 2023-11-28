@@ -1,0 +1,15 @@
+{
+  "author": "MicLon",
+  "email": "jcnd@163.com",
+  "github_user": "mic1on",
+  "package_name": "example-project",
+  "module_name": "{{ cookiecutter.package_name|lower|replace('-', '_') }}",
+  "description": "A simple application",
+  "version": "0.0.1",
+  "copyright_year": "{% now 'utc', '%Y' %}",
+  "license": [
+    "MIT",
+    "GPL-3.0-or-later",
+    "Proprietary"
+  ]
+}
