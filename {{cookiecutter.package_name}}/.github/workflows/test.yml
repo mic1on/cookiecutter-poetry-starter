@@ -17,13 +17,13 @@ jobs:
       matrix:
         os: [ "ubuntu-latest" ]
         python-version: [ "3.8", "3.9", "3.10", "3.11" ]
-    runs-on: ${{ matrix.os }}
+    runs-on: {%- raw -%}${{ matrix.os }}{%- endraw -%}
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python {%- raw -%}${{ matrix.python-version }}{%- endraw -%}
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: {%- raw -%}${{ matrix.python-version }}{%- endraw -%}
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          key: {%- raw -%}venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}{%- endraw -%}
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root --all-extras
